@@ -1,0 +1,8 @@
+h1 = @repository.full_name
+
+menu.px-0
+  = link_to repository_checks_path(@repository), class: 'btn btn-primary' do
+    i.bi.bi-rocket-takeoff.me-1
+    = t('.check')
+
+= render partial: 'repository', object: @repository

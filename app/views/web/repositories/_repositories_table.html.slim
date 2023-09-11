@@ -1,0 +1,13 @@
+section#repositories
+  table.table
+    thead
+      tr
+        th scope='col' = t('.name')
+        th scope='col' = t('.language')
+        th scope='col' = t('.last_check_status')
+    tbody
+      - repositories.each do |repository|
+        tr
+          td = link_to repository.name, repository
+          td = repository.language
+          td = hsn(Repository::Check, repository.checks.last.state)

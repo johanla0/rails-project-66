@@ -1,0 +1,30 @@
+---
+en:
+  web:
+    repositories:
+      checks:
+        show:
+          back_to_repository: Back To Repository
+          check_number: 'Check #%{number}'
+          linter_message: Message
+          position: Position
+          rule_name: Rule Name
+      index:
+        add_repository: Add Repository
+      new:
+        add_new_repository: Add Repository
+      repositories_table:
+        language: Language
+        last_check_status: Last Check Status
+        name: Name
+      show:
+        check: Check
+    welcome:
+      index:
+        how_to_use: How to use it
+        how_to_use_description_1: Sign in.
+        how_to_use_description_2: Add a repository by URL.
+        how_to_use_description_3: Choose repository to see the test results.
+        title: Repository Analyzer
+        what_is_it: What is it?
+        what_is_it_description: This app follows the added Github repositories. Whenever it detects changes, it runs specific tests. In case if any test fails a report is to be sent.

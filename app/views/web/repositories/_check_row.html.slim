@@ -1,0 +1,7 @@
+tr *{ id: dom_id(check.repository, :check_row) }
+  td scope='row'
+    = link_to check.id, repository_check_path(check.repository, check)
+  td = hsn(Repository::Check, check.state)
+  td = link_to check.commit, commit_url(check.repository, check.commit), target: '_blank', rel: :noopener
+  td = check.result
+  td = l(check.created_at, format: :short)

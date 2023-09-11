@@ -1,0 +1,17 @@
+---
+en:
+  all_repositories: All Repositories
+  enumerize:
+    repository:
+      language:
+        javascript: JavaScript
+        php: PHP
+        ruby: Ruby
+  home: Home
+  new_repository: New repository
+  not_authorized: Not enough permissions
+  repositories: Repositories
+  repository_analyzer: Repository Quality Analyzer
+  sign_in: Sign in
+  sign_out: Sign out
+  title: Repository Quality Analyzer

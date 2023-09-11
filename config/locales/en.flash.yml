@@ -1,0 +1,14 @@
+---
+en:
+  flash:
+    web:
+      auth:
+        callback:
+          error: Something went wrong
+          success: Signed in successfully
+        destroy:
+          success: Signed out successfully
+      repositories:
+        create:
+          error: Error has occurred while adding repository
+          success: New repository has been added successfully

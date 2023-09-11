@@ -1,0 +1,11 @@
+---
+en:
+  events:
+    fail: Fail
+    finish: Finish
+    start: Start
+  states:
+    created: Created
+    failed: Failed
+    finished: Finished
+    in_process: In Process

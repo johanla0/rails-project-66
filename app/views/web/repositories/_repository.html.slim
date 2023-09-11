@@ -1,0 +1,31 @@
+section.border-bottom *{ id: dom_id(repository) }
+  dl
+    .d-flex.gap-3
+      dt.mb-3 = han(Repository, :name)
+      dd = repository.name
+    .d-flex.gap-3
+      dt.mb-3 = han(Repository, :language)
+      dd = repository.language
+    .d-flex.gap-3
+      dt.mb-3 = han(Repository, :created_at)
+      dd = l(repository.created_at, format: :long)
+    .d-flex.gap-3
+      dt.mb-3 = han(Repository, :updated_at)
+      dd = l(repository.updated_at, format: :long)
+
+section
+  table.table.table-striped
+    thead
+      tr
+        th
+        th scope='col'
+          = han(Repository::Check, :state)
+        th scope='col'
+          = han(Repository::Check, :commit)
+        th scope='col'
+          = han(Repository::Check, :result)
+        th scope='col'
+          = han(Repository::Check, :created_at)
+    tbody *{ id: dom_id(repository, :table) }
+      - repository.checks.each do |check|
+        = render partial: 'check_row', locals: { check: }

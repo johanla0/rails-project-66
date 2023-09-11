@@ -1,0 +1,6 @@
+.row.mb-3
+  = link_to new_repository_path do
+    i.bi.bi-plus.me-1
+    = t('.add_repository')
+
+= render partial: 'repositories_table', locals: { repositories: @repositories }

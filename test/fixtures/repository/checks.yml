@@ -1,0 +1,63 @@
+# == Schema Information
+#
+# Table name: repository_checks
+#
+#  id            :integer          not null, primary key
+#  commit        :string
+#  issue_count   :integer          default(0)
+#  issues        :json
+#  result        :boolean          default(FALSE)
+#  state         :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  repository_id :integer          not null
+#
+# Indexes
+#
+#  index_repository_checks_on_repository_id  (repository_id)
+#
+# Foreign Keys
+#
+#  repository_id  (repository_id => repositories.id)
+#
+
+created:
+  commit: <%= SecureRandom.hex(4) %>
+  issue_count: 0
+  result: false
+  state: created
+  repository: octokit
+
+in_process:
+  commit: <%= SecureRandom.hex(4) %>
+  issue_count: 0
+  result: false
+  state: in_process
+  repository: octokit
+
+failed:
+  commit: <%= SecureRandom.hex(4) %>
+  issue_count: 1
+  result: false
+  state: failed
+  repository: octokit
+  issues: >
+    {
+      "lines": [
+        {
+          "linter_message": "bin/filepath"
+        },
+        {
+          "linter_message": "Message",
+          "rule_name": "Rule name",
+          "position": "1:1"
+        }
+      ]
+    }
+
+finished:
+  commit: <%= SecureRandom.hex(4) %>
+  issue_count: 0
+  result: true
+  state: finished
+  repository: hexlet-cv

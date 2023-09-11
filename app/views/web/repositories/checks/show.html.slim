@@ -1,0 +1,38 @@
+h1 = t('.check_number', number: @check.id)
+
+menu.px-0
+  = link_to repository_path(@check.repository), class: 'btn btn-primary' do
+    i.bi.bi-chevron-left.me-1
+    = t('.back_to_repository')
+
+table.table *{ id: dom_id(@check) }
+  tr
+    td.w-50 scope='row'
+      = han(Repository::Check, :created_at)
+    td.w-50 = l(@check.created_at, format: :long)
+  tr
+    td = han(Repository::Check, :state)
+    td = hsn(Repository::Check, @check.state)
+  tr
+    td = han(Repository::Check, :result)
+    td = @check.result
+  tr
+    td = han(Repository::Check, :issue_count)
+    td = @check.issue_count
+  tr
+    td = han(Repository::Check, :commit)
+    td = link_to @check.commit, commit_url(@check.repository, @check.commit), target: '_blank', rel: :noopener
+
+- if @issues.present?
+  table.table.mt-5 *{ id: dom_id(@check, :details) }
+    thead
+      tr
+        th.w-50 = t('.linter_message')
+        th.w-25 = t('.rule_name')
+        th.w-25 = t('.position')
+    tbody
+      - @issues.each do |line|
+        tr
+          td = line['linter_message']
+          td = line['rule_name']
+          td = line['position']
