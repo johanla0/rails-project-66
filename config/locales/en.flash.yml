@@ -12,3 +12,7 @@ en:
         create:
           error: Error has occurred while adding repository
           success: New repository has been added successfully
+        checks:
+          create:
+            error: 'Cannot perform currently: the previous check is still running'
+            success: Check has been started

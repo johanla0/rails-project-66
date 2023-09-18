@@ -1,38 +1,34 @@
 # frozen_string_literal: true
 
 class Web::RepositoriesController < Web::ApplicationController
-  RELEVANT_FIELDS = %i[full_name git_url language name ssh_url].freeze
-
   before_action :authenticate_user
+  before_action :fetch_client_repos, only: %i[new create]
 
   def index
-    # @repositories = current_user.repositories
+    authorize(Repository)
+
+    # FIXME: Should be current user repositories only
+    # @repositories = current_user.repositories.order(full_name: :asc)
     @repositories = Repository.all
   end
 
   def show
     @repository = Repository.find(params[:id])
+    authorize @repository
   end
 
   def new
     authorize(Repository)
 
     @repository = Repository.new
-    @client_repos = fetch_client_repos
   end
 
   def create
     authorize(Repository)
 
-    @repository = current_user.repositories.build(repository_params)
-
-    attrs = fetch_client_repos.find { |r| r.full_name == @repository.full_name }.to_h.slice(*RELEVANT_FIELDS)
-    @repository.assign_attributes(attrs)
-
-    if @repository.valid?
-      @repository.save
-      RepositoryService.check!(@repository)
-      f :success, redirect: repository_path(@repository)
+    @repository = RepositoryService.create!(current_user, repository_params)
+    if @repository
+      f :success, redirect: repositories_path(@repository)
     else
       f :error, now: true, render: :new, status: :unprocessable_entity
     end
@@ -48,11 +44,10 @@ class Web::RepositoriesController < Web::ApplicationController
   private
 
   def repository_params
-    params.require(:repository).permit(:full_name)
+    params.require(:repository).permit(:github_id)
   end
 
   def fetch_client_repos
-    client = Octokit::Client.new access_token: current_user.token, auto_paginate: true
-    client.repos
+    @client_repos = UserService.fetch_repositories!(current_user)
   end
 end

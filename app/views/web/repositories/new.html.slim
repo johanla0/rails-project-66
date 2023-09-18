@@ -1,5 +1,5 @@
 h1 = t('.add_new_repository')
 
 = simple_form_for @repository, url: repositories_path do |f|
-  = f.input :full_name, collection: @client_repos.map(&:full_name)
+  = f.input :github_id, collection: @client_repos.map { |r| [r[:full_name], r[:id]] }
   = f.button :submit, class: 'btn-primary'

@@ -4,59 +4,52 @@ require 'test_helper'
 
 class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = users(:john)
-    @repository = repositories(:octokit)
-  end
-
-  test '#index unauthorized' do
-    get repositories_path
-    assert_response :redirect
+    @user = users(:jane)
+    @repository = repositories(:node)
+    sign_in @user
   end
 
   test '#index' do
-    sign_in @user
-
     get repositories_path
+
     assert_response :success
   end
 
   test '#new' do
-    sign_in @user
-
     get new_repository_path
+
     assert_response :success
   end
 
   test '#show' do
-    sign_in @user
-
     get repository_path(@repository)
+
     assert_response :success
   end
 
   test '#create' do
-    sign_in @user
+    response = load_fixture('files/node.json')
+
+    uri_template = Addressable::Template.new 'https://api.github.com/repos/{user}/{repo}'
+    stub_request(:get, uri_template)
+      .to_return(
+        status: 200,
+        body: response,
+        headers: { content_type: 'application/json' }
+      )
 
     attrs = {
-      name: 'hexlet-cv',
-      full_name: 'hexlet/hexlet-cv',
-      language: 'Ruby',
-      git_url: 'https://github.com/Hexlet/hexlet-cv',
-      ssh_url: 'git@github.com:Hexlet/hexlet-cv.git'
+      github_id: 27_193_779
     }
-
     post repositories_path, params: { repository: attrs }
-
-    assert_response :redirect
 
     repository = Repository.find_by attrs
 
     assert { repository.present? }
+    assert_redirected_to repository_path(repository)
   end
 
   test '#destroy' do
-    sign_in @user
-
     delete repository_path(@repository)
 
     assert_response :redirect
@@ -64,5 +57,43 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository = Repository.find @repository.id
 
     assert { repository.blank? }
+  end
+
+  test '#check ruby' do
+    repository = repositories(:hexletcv)
+
+    post repository_checks_path(repository)
+
+    assert_response :redirect
+
+    perform_enqueued_jobs do
+      # assert_enqueued_with(job: ApplicationContainer[:repository_check_job], args: [repository])
+      # MyJob.perform_later(1, 2, 3)
+    end
+
+    assert_performed_jobs 1
+
+    check = repository.checks.last
+    assert { check.finished? }
+    assert { check.issues_count.zero? }
+    assert { check.passed }
+  end
+
+  test '#check javascript' do
+    post repository_checks_path(@repository)
+
+    assert_response :redirect
+
+    perform_enqueued_jobs do
+      # assert_enqueued_with(job: ApplicationContainer[:repository_check_job], args: [@repository])
+      # MyJob.perform_later(1, 2, 3)
+    end
+
+    assert_performed_jobs 1
+
+    check = @repository.checks.last
+    assert { check.finished? }
+    assert { check.issues_count.zero? }
+    assert { check.passed }
   end
 end

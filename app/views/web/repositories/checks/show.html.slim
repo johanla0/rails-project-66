@@ -12,16 +12,16 @@ table.table *{ id: dom_id(@check) }
     td.w-50 = l(@check.created_at, format: :long)
   tr
     td = han(Repository::Check, :state)
-    td = hsn(Repository::Check, @check.state)
+    td = hsn(Repository::Check, @check.aasm_state)
   tr
-    td = han(Repository::Check, :result)
-    td = @check.result
+    td = han(Repository::Check, :passed)
+    td = @check.passed
   tr
-    td = han(Repository::Check, :issue_count)
-    td = @check.issue_count
+    td = han(Repository::Check, :issues_count)
+    td = @check.issues_count
   tr
-    td = han(Repository::Check, :commit)
-    td = link_to @check.commit, commit_url(@check.repository, @check.commit), target: '_blank', rel: :noopener
+    td = han(Repository::Check, :commit_id)
+    td = link_to @check.commit_id, commit_url(@check.repository, @check.commit_id), target: '_blank', rel: :noopener
 
 - if @issues.present?
   table.table.mt-5 *{ id: dom_id(@check, :details) }

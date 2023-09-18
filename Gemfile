@@ -86,6 +86,7 @@ group :test do
   # gem "selenium-webdriver"
   # gem "webdrivers"
   gem 'minitest-power_assert'
+  gem 'webmock'
 end
 
 group :production do

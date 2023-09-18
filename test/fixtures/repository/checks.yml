@@ -3,13 +3,13 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
-#  commit        :string
-#  issue_count   :integer          default(0)
+#  aasm_state    :string
 #  issues        :json
-#  result        :boolean          default(FALSE)
-#  state         :string
+#  issues_count  :integer          default(0)
+#  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  commit_id     :string
 #  repository_id :integer          not null
 #
 # Indexes
@@ -22,25 +22,25 @@
 #
 
 created:
-  commit: <%= SecureRandom.hex(4) %>
-  issue_count: 0
-  result: false
-  state: created
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 0
+  passed: false
+  aasm_state: created
   repository: octokit
 
 in_process:
-  commit: <%= SecureRandom.hex(4) %>
-  issue_count: 0
-  result: false
-  state: in_process
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 0
+  passed: false
+  aasm_state: in_process
   repository: octokit
 
 failed:
-  commit: <%= SecureRandom.hex(4) %>
-  issue_count: 1
-  result: false
-  state: failed
-  repository: octokit
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 1
+  passed: false
+  aasm_state: failed
+  repository: node
   issues: >
     {
       "lines": [
@@ -56,8 +56,8 @@ failed:
     }
 
 finished:
-  commit: <%= SecureRandom.hex(4) %>
-  issue_count: 0
-  result: true
-  state: finished
-  repository: hexlet-cv
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 0
+  passed: true
+  aasm_state: finished
+  repository: hexletcv

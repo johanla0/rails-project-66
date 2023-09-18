@@ -5,13 +5,13 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
-#  commit        :string
-#  issue_count   :integer          default(0)
+#  aasm_state    :string
 #  issues        :json
-#  result        :boolean          default(FALSE)
-#  state         :string
+#  issues_count  :integer          default(0)
+#  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  commit_id     :string
 #  repository_id :integer          not null
 #
 # Indexes
@@ -27,7 +27,7 @@ class Repository::Check < ApplicationRecord
 
   belongs_to :repository
 
-  aasm column: 'state' do
+  aasm do
     state :created, initial: true
     state :in_process, :failed, :finished
 

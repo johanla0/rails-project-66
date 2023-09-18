@@ -2,8 +2,14 @@
 
 class RepositoryService
   class << self
+    def create!(user, repository_params)
+      repository = RepositoryMutator.create!(user, repository_params)
+      check!(repository)
+      repository
+    end
+
     def check!(repository)
-      # TODO: call check repository job
+      CheckRepositoryJob.perform_async(repository.id)
     end
 
     def destroy!(repository)

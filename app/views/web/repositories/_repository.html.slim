@@ -21,9 +21,9 @@ section
         th scope='col'
           = han(Repository::Check, :state)
         th scope='col'
-          = han(Repository::Check, :commit)
+          = han(Repository::Check, :commit_id)
         th scope='col'
-          = han(Repository::Check, :result)
+          = han(Repository::Check, :passed)
         th scope='col'
           = han(Repository::Check, :created_at)
     tbody *{ id: dom_id(repository, :table) }

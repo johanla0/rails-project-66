@@ -1,0 +1,21 @@
+---
+en:
+  check_mailer:
+    failed:
+      content:
+        - Check failed for %{repository_name}
+        - 'Error has occured: %{error}'
+        - 'Find details here: %{repository_check_url}'
+      content_html:
+        - Check failed for %{repository_name}
+        - 'Error has occured: %{error}'
+        - Find details <a href="%{repository_check_url}">here</a>
+      subject: Check has been finished for %{repository_name}
+    with_issues:
+      content:
+        - Check finished with issues for %{repository_name}
+        - 'Find details here: %{repository_check_url}'
+      content_html:
+        - Check finished with issues for %{repository_name}
+        - Find details <a href="%{repository_check_url}">here</a>
+      subject: Check has been finished for %{repository_name}

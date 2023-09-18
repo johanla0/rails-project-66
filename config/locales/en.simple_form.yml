@@ -9,4 +9,4 @@ en:
       default_message: 'Please review the problems below:'
     labels:
       repository:
-        full_name: Github
+        github_id: Github

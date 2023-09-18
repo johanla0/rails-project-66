@@ -16,22 +16,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_150428) do
 
   create_table "repositories", force: :cascade do |t|
     t.string "name"
-    t.string "full_name", null: false
+    t.string "full_name"
     t.string "language"
     t.string "git_url"
     t.string "ssh_url"
+    t.integer "github_id"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["full_name"], name: "index_repositories_on_full_name"
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
   create_table "repository_checks", force: :cascade do |t|
-    t.boolean "result", default: false
-    t.string "commit"
-    t.integer "issue_count", default: 0
-    t.string "state"
+    t.boolean "passed", default: false
+    t.string "commit_id"
+    t.integer "issues_count", default: 0
+    t.string "aasm_state"
     t.json "issues"
     t.integer "repository_id", null: false
     t.datetime "created_at", null: false

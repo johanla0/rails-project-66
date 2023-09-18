@@ -10,4 +10,4 @@ section#repositories
         tr
           td = link_to repository.name, repository
           td = repository.language
-          td = hsn(Repository::Check, repository.checks.last.state)
+          td = hsn(Repository::Check, repository.checks.last.aasm_state)

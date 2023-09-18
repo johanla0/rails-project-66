@@ -3,10 +3,16 @@
 class CheckRepositoryJob
   include Sidekiq::Job
 
-  def perform
-    # TODO: Fetch repo from Github
-    # Run linters check
-    # Make a report
-    # Set result to true or false
+  def perform(repository_id)
+    repository = Repository.find repository_id
+    return if repository.blank?
+
+    check = Repository::Check.create(repository:)
+    check.start!
+
+    check.finish!
+    true
+  ensure
+    FileUtils.rm_r repository.directory, force: true
   end
 end
