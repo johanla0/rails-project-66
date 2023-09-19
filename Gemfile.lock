@@ -108,6 +108,9 @@ GEM
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
     ffi (1.15.5)
+    git (1.18.0)
+      addressable (~> 2.8)
+      rchardet (~> 1.8)
     globalid (1.2.0)
       activesupport (>= 6.1)
     hashdiff (1.0.1)
@@ -231,6 +234,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    rchardet (1.8.0)
     rdoc (6.5.0)
       psych (>= 4.0.0)
     redis-client (0.16.0)
@@ -264,6 +268,9 @@ GEM
       rubocop (>= 1.33.0, < 2.0)
     rubocop-rake (0.6.0)
       rubocop (~> 1.0)
+    rubocop-slim (0.2.2)
+      rubocop (~> 1.45)
+      slimi (~> 0.7)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     sassc (2.4.0)
@@ -303,6 +310,10 @@ GEM
     slim_lint (0.24.0)
       rubocop (>= 1.0, < 2.0)
       slim (>= 3.0, < 6.0)
+    slimi (0.7.4)
+      temple
+      thor
+      tilt
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -364,6 +375,7 @@ DEPENDENCIES
   dry-container
   enumerize (~> 2.7)
   faker
+  git
   i18n-debug
   jbuilder
   jsbundling-rails
@@ -381,6 +393,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rake
+  rubocop-slim
   sassc-rails
   sentry-rails
   sentry-ruby

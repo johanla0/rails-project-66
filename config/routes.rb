@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root 'web/welcome#index'
 
   namespace :api do
-    post 'checks', to: 'webhooks#github'
+    resources :github_webhooks, only: :create, as: 'checks'
+    # scope module: :github_webhooks do
+    #   post 'checks'
+    # end
   end
 
   scope module: :web do

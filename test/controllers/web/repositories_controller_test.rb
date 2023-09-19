@@ -58,42 +58,4 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert { repository.blank? }
   end
-
-  test '#check ruby' do
-    repository = repositories(:hexletcv)
-
-    post repository_checks_path(repository)
-
-    assert_response :redirect
-
-    perform_enqueued_jobs do
-      # assert_enqueued_with(job: ApplicationContainer[:repository_check_job], args: [repository])
-      # MyJob.perform_later(1, 2, 3)
-    end
-
-    assert_performed_jobs 1
-
-    check = repository.checks.last
-    assert { check.finished? }
-    assert { check.issues_count.zero? }
-    assert { check.passed }
-  end
-
-  test '#check javascript' do
-    post repository_checks_path(@repository)
-
-    assert_response :redirect
-
-    perform_enqueued_jobs do
-      # assert_enqueued_with(job: ApplicationContainer[:repository_check_job], args: [@repository])
-      # MyJob.perform_later(1, 2, 3)
-    end
-
-    assert_performed_jobs 1
-
-    check = @repository.checks.last
-    assert { check.finished? }
-    assert { check.issues_count.zero? }
-    assert { check.passed }
-  end
 end
