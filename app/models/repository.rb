@@ -26,6 +26,7 @@
 class Repository < ApplicationRecord
   RELEVANT_FIELDS = %i[full_name git_url language name ssh_url].freeze
 
+  include Presentable
   extend Enumerize
 
   belongs_to :user

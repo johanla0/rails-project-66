@@ -3,7 +3,6 @@ require:
   - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
-  - rubocop-slim
 AllCops:
   NewCops: enable
   TargetRubyVersion: 3.2.2

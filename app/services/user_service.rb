@@ -3,12 +3,28 @@
 class UserService
   class << self
     def fetch_repositories!(user)
-      # NOTE: Need to cache repos
-      client = ApplicationContainer[:octokit_client].new(access_token: user.token, auto_paginate: true)
+      client = octokit_client(user)
+      # FIXME: Need to cache repos?
       client.repos
     rescue Octokit::Error => e
+      Rails.logger.error(e.message)
       Sentry.capture_exception(e)
       []
+    end
+
+    def fetch_repository!(user, repository)
+      client = octokit_client(user)
+      client.repo(repository.github_id)
+    rescue Octokit::Error => e
+      Rails.logger.error(e.message)
+      Sentry.capture_exception(e)
+      nil
+    end
+
+    private
+
+    def octokit_client(user)
+      @octokit_client ||= ApplicationContainer[:octokit_client].new(access_token: user.token, auto_paginate: true)
     end
   end
 end

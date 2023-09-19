@@ -43,4 +43,8 @@ class Repository::Check < ApplicationRecord
       transitions from: :in_process, to: :finished
     end
   end
+
+  def with_issues?
+    issues_count.positive?
+  end
 end

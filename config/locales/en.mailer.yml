@@ -4,11 +4,9 @@ en:
     failed:
       content:
         - Check failed for %{repository_name}
-        - 'Error has occured: %{error}'
         - 'Find details here: %{repository_check_url}'
       content_html:
         - Check failed for %{repository_name}
-        - 'Error has occured: %{error}'
         - Find details <a href="%{repository_check_url}">here</a>
       subject: Check has been finished for %{repository_name}
     with_issues:

@@ -69,7 +69,6 @@ group :development do
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
-  gem 'rubocop-slim', require: false
 
   gem 'slim_lint', '~> 0.24.0'
   # Use console on exceptions pages [https://github.com/rails/web-console]

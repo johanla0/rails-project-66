@@ -14,5 +14,7 @@
 #  updated_at :datetime         not null
 #
 class User < ApplicationRecord
+  include Presentable
+
   has_many :repositories, dependent: :destroy
 end
