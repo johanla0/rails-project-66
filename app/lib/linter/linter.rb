@@ -8,52 +8,61 @@ module Linter
 
     def initialize(check)
       @check = check
-
-      # TODO: Distinguish which linter to run
-      @json_data = run_javascript_linter
+      @json_data = case @check.repository.language
+                   when :javascript
+                     run_javascript_linter
+                   when :ruby
+                     run_ruby_linter
+                   end
     end
 
     private
 
     def run_javascript_linter
       repository_directory = @check.repository.decorate.directory_path
-      command = "yarn run eslint #{eslint_options.join(' ')} #{repository_directory}"
+      command = "yarn run eslint #{eslint_options(repository_directory).join(' ')} #{repository_directory}"
       stdout, stderr, status = Open3.capture3(command)
       return nil if status.exitstatus.positive? && stderr
 
       stdout.split("\n")[2]
     end
 
-    # TODO: Add ruby linter
-    def run_ruby_linter; end
-
-    def config_file_lookup(language)
+    def run_ruby_linter
       repository_directory = @check.repository.decorate.directory_path
+      command = "bundle exec rubocop #{rubocop_options(repository_directory).join(' ')}"
+      Dir.chdir(repository_directory)
+      stdout, stderr, status = Open3.capture3(command)
+      return nil if status.exitstatus.positive? && stderr
+
+      stdout
+    end
+
+    def config_file_lookup(repository_directory, language)
       config_files = case language
                      when :javascript
                        Dir.glob("#{repository_directory}/.eslintrc.*")
                      when :ruby
                        Dir.glob("#{repository_directory}/.rubocop.yml")
                      else
-                       return false
+                       []
                      end
       return false if config_files.empty?
 
       "#{repository_directory}/#{config_files.first}"
     end
 
-    def eslint_options
+    def eslint_options(repository_directory)
       default_config = '--no-eslintrc'
-      config_file = config_file_lookup(:javascript)
-      options = config_file ? "--config #{config_file}" : default_config
+      config_file_path = config_file_lookup(repository_directory, :javascript)
+      options = config_file_path ? "--config #{config_file_path}" : default_config
 
       ['--format json', options]
     end
 
-    def rubocop_options
+    def rubocop_options(repository_directory)
       default_config = "#{Gem::Specification.find_by_name('rubocop').gem_dir}/config/default.yml"
-      config_file = config_file_lookup(:ruby)
-      options = config_file ? "--config #{config_file}" : "--config #{default_config}"
+      config_file_path = config_file_lookup(repository_directory, :ruby)
+      options = config_file_path ? "--config #{config_file_path}" : "--config #{default_config}"
 
       [
         '--safe',
