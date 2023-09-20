@@ -19,14 +19,19 @@ class Repository::CheckMutator
 
       check.commit_id = git.log.first.sha[0, 7]
 
-      linter = Linter.new(check)
-      linter.run
+      linter = Linter::Linter.new(check)
+      if linter.json_data.nil?
+        check.fail!
+        return check
+      end
 
-      check.issues = linter.json_result
-      check.issues_count = linter.issues_count
+      formatter = Linter::Formatter.new(linter)
 
+      check.issues = formatter.json_data
+      check.issues_count = formatter.issues_count
       check.finish!
       check.passed = check.issues_count.zero?
+
       check
     ensure
       repository_directory = check.repository.decorate.directory_path

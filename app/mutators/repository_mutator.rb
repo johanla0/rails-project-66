@@ -10,6 +10,7 @@ class RepositoryMutator
       attrs[:language] = attrs[:language].downcase
       repository.assign_attributes(attrs)
       repository.save
+
       repository
     end
   end
