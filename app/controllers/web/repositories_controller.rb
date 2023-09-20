@@ -8,8 +8,8 @@ class Web::RepositoriesController < Web::ApplicationController
     authorize(Repository)
 
     # FIXME: Should be current user repositories only
-    # @repositories = current_user.repositories.order(full_name: :asc)
-    @repositories = Repository.all
+    # @repositories = current_user.repositories.includes([:checks]).order(full_name: :asc).map(&:decorate)
+    @repositories = Repository.all.includes([:checks]).map(&:decorate)
   end
 
   def show

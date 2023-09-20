@@ -37,23 +37,36 @@ in_process:
 
 failed:
   commit_id: <%= SecureRandom.hex(4) %>
-  issues_count: 1
+  issues_count: 3
   passed: false
   aasm_state: failed
   repository: node
   issues: >
-    {
-      "lines": [
-        {
-          "linter_message": "bin/filepath"
-        },
-        {
-          "linter_message": "Message",
-          "rule_name": "Rule name",
-          "position": "1:1"
-        }
-      ]
-    }
+    [
+      {
+        "path": "app/javascript/controllers/toast_controller.js",
+        "issues": [
+          {
+            "message": "'my' is defined but never used.",
+            "name": "no-unused-vars",
+            "line": 4,
+            "column": 10
+          },
+          {
+            "message": "'Controller' is not defined.",
+            "name": "no-undef",
+            "line": 8,
+            "column": 30
+          },
+          {
+            "message": "'bootstrap' is not defined.",
+            "name": "no-undef",
+            "line": 10,
+            "column": 23
+          }
+        ]
+      }
+    ]
 
 finished:
   commit_id: <%= SecureRandom.hex(4) %>

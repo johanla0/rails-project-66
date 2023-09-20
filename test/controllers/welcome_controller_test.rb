@@ -3,7 +3,7 @@
 require 'test_helper'
 
 class WelcomeControllerTest < ActionDispatch::IntegrationTest
-  test '#index' do
+  test '#show' do
     get root_path
 
     assert_response :success

@@ -2,6 +2,6 @@ tr *{ id: dom_id(check.repository, :check_row) }
   td scope='row'
     = link_to check.id, repository_check_path(check.repository, check)
   td = hsn(Repository::Check, check.aasm_state)
-  td = link_to check.commit_id, commit_url(check.repository, check.commit_id), target: '_blank', rel: :noopener
+  td = link_to check.commit_id, github_commit_url(check.repository, check.commit_id), target: '_blank', rel: :noopener
   td = check.passed
   td = l(check.created_at, format: :short)

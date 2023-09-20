@@ -7,7 +7,7 @@ en:
           back_to_repository: Back To Repository
           check_number: 'Check #%{number}'
           linter_message: Message
-          position: Position
+          position: Line:Column
           rule_name: Rule Name
       index:
         add_repository: Add Repository
@@ -20,7 +20,7 @@ en:
       show:
         check: Check
     welcome:
-      index:
+      show:
         how_to_use: How to use it
         how_to_use_description_1: Sign in.
         how_to_use_description_2: Add a repository by URL.

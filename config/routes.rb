@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'web/welcome#index'
+  root 'web/welcome#show'
 
   namespace :api do
     resources :github_webhooks, only: :create, as: 'checks'

@@ -9,6 +9,7 @@ en:
         ruby: Ruby
   home: Home
   new_repository: New repository
+  no_info: '-'
   not_authorized: Not enough permissions
   repositories: Repositories
   repository_analyzer: Repository Quality Analyzer

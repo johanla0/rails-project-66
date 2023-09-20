@@ -1,5 +1,5 @@
 section#repositories
-  table.table
+  table.table.table-hover
     thead
       tr
         th scope='col' = t('.name')
@@ -10,4 +10,4 @@ section#repositories
         tr
           td = link_to repository.name, repository
           td = repository.language
-          td = hsn(Repository::Check, repository.checks.last.aasm_state)
+          td = repository.last_check_status

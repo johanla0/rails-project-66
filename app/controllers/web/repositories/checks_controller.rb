@@ -2,12 +2,11 @@
 
 class Web::Repositories::ChecksController < Web::Repositories::ApplicationController
   def show
-    repository = current_user.repositories.find(params[:repository_id])
+    repository = Repository.find params[:repository_id]
     authorize repository
 
     @check = Repository::Check.find params[:id]
-    # FIXME: Update according to final JSON structure
-    @issues = JSON.parse(@check.issues)['lines'] if @check.issues.present?
+    @issues = JSON.parse(@check.issues, symbolize_names: true) if @check.issues.present?
   end
 
   def create

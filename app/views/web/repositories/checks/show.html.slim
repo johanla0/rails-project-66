@@ -21,7 +21,7 @@ table.table *{ id: dom_id(@check) }
     td = @check.issues_count
   tr
     td = han(Repository::Check, :commit_id)
-    td = link_to @check.commit_id, commit_url(@check.repository, @check.commit_id), target: '_blank', rel: :noopener
+    td = link_to @check.commit_id, github_commit_url(@check.repository, @check.commit_id), target: '_blank', rel: :noopener
 
 - if @issues.present?
   table.table.mt-5 *{ id: dom_id(@check, :details) }
@@ -31,8 +31,12 @@ table.table *{ id: dom_id(@check) }
         th.w-25 = t('.rule_name')
         th.w-25 = t('.position')
     tbody
-      - @issues.each do |line|
+      - @issues.each do |file|
         tr
-          td = line['linter_message']
-          td = line['rule_name']
-          td = line['position']
+          td colspan=3
+            = link_to file[:path], github_file_url(@check.repository, @check.commit_id, file[:path]), target: '_blank', rel: :noopener
+        - file[:issues].each do |issue|
+            tr
+              td = issue[:message]
+              td = issue[:name]
+              td = "#{issue[:line]}:#{issue[:column]}"

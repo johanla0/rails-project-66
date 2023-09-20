@@ -2,18 +2,12 @@
 en:
   check_mailer:
     failed:
-      content:
-        - Check failed for %{repository_name}
-        - 'Find details here: %{repository_check_url}'
-      content_html:
-        - Check failed for %{repository_name}
-        - Find details <a href="%{repository_check_url}">here</a>
-      subject: Check has been finished for %{repository_name}
+      check_failed: Check failed for %{repository_name}
+      details_here: 'Find details here: %{repository_check_url}'
+      details_here_html: Find details <a href="%{repository_check_url}">here</a>
+      subject: Check has been failed for %{repository_name}
     with_issues:
-      content:
-        - Check finished with issues for %{repository_name}
-        - 'Find details here: %{repository_check_url}'
-      content_html:
-        - Check finished with issues for %{repository_name}
-        - Find details <a href="%{repository_check_url}">here</a>
-      subject: Check has been finished for %{repository_name}
+      check_with_issues: Check finished with issues for %{repository_name}
+      details_here: 'Find details here: %{repository_check_url}'
+      details_here_html: Find details <a href="%{repository_check_url}">here</a>
+      subject: Check has been finished with issues for %{repository_name}
