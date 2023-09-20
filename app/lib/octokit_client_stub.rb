@@ -11,6 +11,6 @@ class OctokitClientStub
   private
 
   def load_fixture(filename)
-    File.read("#{Rails.root}/test/fixtures/#{filename}")
+    File.read(Rails.root.join("test/fixtures/#{filename}").to_s)
   end
 end
