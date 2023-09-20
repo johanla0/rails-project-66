@@ -19,9 +19,11 @@ gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.3'
+gem 'redis'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'sentry-sidekiq'
+gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'sprockets-rails'
@@ -31,9 +33,6 @@ gem 'turbo-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
-
-# Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"

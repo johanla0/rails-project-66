@@ -27,6 +27,8 @@ eslint!:
 	npx eslint app/javascript --ext .js --fix
 open:
 	@ echo open http://localhost:3000
+sidekiq:
+	bundle exec sidekiq
 slimlint:
 	bundle exec slim-lint app/views/
 style:

@@ -237,6 +237,8 @@ GEM
     rchardet (1.8.0)
     rdoc (6.5.0)
       psych (>= 4.0.0)
+    redis (5.0.7)
+      redis-client (>= 0.9.0)
     redis-client (0.16.0)
       connection_pool
     regexp_parser (2.8.1)
@@ -381,6 +383,7 @@ DEPENDENCIES
   pundit (~> 2.3)
   rack-mini-profiler
   rails (~> 7.0.4, >= 7.0.4.3)
+  redis
   rubocop
   rubocop-minitest
   rubocop-performance
@@ -390,6 +393,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
+  sidekiq
   simple_form
   slim-rails
   slim_lint (~> 0.24.0)
