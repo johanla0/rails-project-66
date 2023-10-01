@@ -28,6 +28,7 @@ octokit:
   language: ruby
   git_url: https://github.com/octokit/octokit.rb
   ssh_url: git@github.com:octokit/octokit.rb.git
+  github_id: <%= SecureRandom.random_number(1_000_000) %>
   user: john
 
 hexletcv:
@@ -36,6 +37,7 @@ hexletcv:
   language: ruby
   git_url: https://github.com/Hexlet/hexlet-cv
   ssh_url: git@github.com:Hexlet/hexlet-cv.git
+  github_id: <%= SecureRandom.random_number(1_000_000) %>
   user: jane
 
 node:
@@ -44,4 +46,5 @@ node:
   language: javascript
   git_url: https://github.com/nodejs/node
   ssh_url: git@github.com:nodejs/node.git
+  github_id: <%= SecureRandom.random_number(1_000_000) %>
   user: jane

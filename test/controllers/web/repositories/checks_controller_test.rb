@@ -2,10 +2,10 @@
 
 require 'test_helper'
 
-class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
+class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:jane)
-    @check = checks(:finished)
+    @check = repository_checks(:finished)
     @repository = repositories(:hexletcv)
     sign_in @user
   end

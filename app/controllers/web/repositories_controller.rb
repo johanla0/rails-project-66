@@ -28,7 +28,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
     @repository = RepositoryService.create!(current_user, repository_params)
     if @repository
-      f :success, redirect: repositories_path(@repository)
+      f :success, redirect: repository_path(@repository)
     else
       f :error, now: true, render: :new, status: :unprocessable_entity
     end

@@ -15,7 +15,7 @@ class RepositoryService
       FileUtils.mkdir_p(user_directory)
       Dir.chdir(user_directory)
 
-      github_repository = UserService.fetch_repository!(repository)
+      github_repository = UserService.fetch_repository!(repository.user, repository)
       begin
         Git.clone(github_repository[:clone_url], nil, depth: 1)
       rescue Git::FailedError => e

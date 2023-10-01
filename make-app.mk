@@ -6,8 +6,15 @@ ci-setup:
 	yarn install --cache-folder .yarn-cache
 	bin/rails assets:precompile
 check: lint test
+env:
+	[ -f .env.example ] && (cp .env.example .env) || (touch .env)
+	echo '.env' >> .gitignore
 esbuild:
 	yarn build --watch
+eslint:
+	npx eslint app/javascript --ext .js
+eslint!:
+	npx eslint app/javascript --ext .js --fix
 install:
 	bundle install
 	bundle exec bin/rails db:create
@@ -21,10 +28,6 @@ lint:
 	make stylelint
 logs:
 	tail -f log/development.log
-eslint:
-	npx eslint app/javascript --ext .js
-eslint!:
-	npx eslint app/javascript --ext .js --fix
 open:
 	@ echo open http://localhost:3000
 sidekiq:

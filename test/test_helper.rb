@@ -6,6 +6,8 @@ require 'rails/test_help'
 require 'sidekiq/testing'
 require 'webmock/minitest'
 
+Dir[Rails.root.join('test/support/**/*.rb')].each { |f| require f }
+
 OmniAuth.config.test_mode = true
 Sidekiq::Testing.inline!
 
@@ -21,11 +23,11 @@ class ActiveSupport::TestCase
   end
 
   # Add more helper methods to be used by all tests here...
-  class ActionDispatch::IntegrationTest
-    include AuthenticationHelper
+  include AuthenticationHelper
 
-    def load_fixture(filename)
-      File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
-    end
+  def load_fixture(filename)
+    File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
+  end
+  class ActionDispatch::IntegrationTest
   end
 end

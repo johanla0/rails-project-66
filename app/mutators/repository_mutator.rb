@@ -5,8 +5,8 @@ class RepositoryMutator
     def create!(user, repository_params)
       repository = user.repositories.build(repository_params)
 
-      client_repos = UserService.fetch_repositories!(current_user)
-      attrs = client_repos.find { |r| r.id == repository.github_id }.to_h.slice(*Repository::RELEVANT_FIELDS)
+      client_repos = UserService.fetch_repositories!(user)
+      attrs = client_repos.find { |r| r[:id] == repository.github_id }.to_h.slice(*Repository::RELEVANT_FIELDS)
       attrs[:language] = attrs[:language].downcase
       repository.assign_attributes(attrs)
       repository.save
