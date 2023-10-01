@@ -5,7 +5,6 @@ require 'test_helper'
 class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:jane)
-    @repository = repositories(:node)
     sign_in @user
   end
 
@@ -22,13 +21,14 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#show' do
-    get repository_path(@repository)
+    repository = repositories(:node)
+    get repository_path(repository)
 
     assert_response :success
   end
 
   test '#create' do
-    response = load_fixture('files/node.json')
+    response = load_fixture('files/repo_javascript.json')
 
     uri_template = Addressable::Template.new 'https://api.github.com/repos/{user}/{repo}'
     stub_request(:get, uri_template)
@@ -39,7 +39,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
       )
 
     attrs = {
-      github_id: 27_193_779
+      github_id: 307_194_079
     }
 
     post repositories_path, params: { repository: attrs }

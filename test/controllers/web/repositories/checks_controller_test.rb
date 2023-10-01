@@ -5,8 +5,8 @@ require 'test_helper'
 class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:jane)
-    @check = repository_checks(:finished)
-    @repository = repositories(:hexletcv)
+    @check = repository_checks(:created)
+    @repository = repositories(:node)
     sign_in @user
   end
 
@@ -16,6 +16,7 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # rubocop:disable Minitest/MultipleAssertions
   test '#create' do
     checks_count_before = @repository.checks.count
     post repository_checks_path(@repository)
@@ -25,5 +26,12 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     @repository.reload
 
     assert { @repository.checks.count > checks_count_before }
+
+    check = Repository::Check.last
+
+    assert { check.finished? }
+    assert { check.issues_count == 3 }
+    assert { !check.passed }
   end
+  # rubocop:enable Minitest/MultipleAssertions
 end

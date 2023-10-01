@@ -1,0 +1,25 @@
+[
+  {
+    "path": "app/javascript/controllers/toast_controller.js",
+    "issues": [
+      {
+        "message": "'my' is assigned a value but never used.",
+        "name": "no-unused-vars",
+        "line": 4,
+        "column": 7
+      },
+      {
+        "message": "'Controller' is not defined.",
+        "name": "no-undef",
+        "line": 6,
+        "column": 30
+      },
+      {
+        "message": "'bootstrap' is not defined.",
+        "name": "no-undef",
+        "line": 8,
+        "column": 23
+      }
+    ]
+  }
+]

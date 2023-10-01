@@ -8,7 +8,7 @@ module Linter
       @linter = linter
       parsed_raw_data = JSON.parse(@linter.json_data, symbolize_names: true)
 
-      case @linter.check.repository.language
+      case @linter.check.repository.language.to_sym
       when :javascript
         @issues_count = count_issues_eslint(parsed_raw_data)
         formatted_data = format_eslint(parsed_raw_data)

@@ -8,7 +8,7 @@ module Linter
 
     def initialize(check)
       @check = check
-      @json_data = case @check.repository.language
+      @json_data = case @check.repository.language.to_sym
                    when :javascript
                      run_javascript_linter
                    when :ruby

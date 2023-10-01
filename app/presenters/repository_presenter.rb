@@ -6,6 +6,6 @@ class RepositoryPresenter < SimpleDelegator
   end
 
   def last_check_status
-    checks.any? ? checks.last.passed : t('no_info')
+    checks.any? ? checks.last.passed : I18n.t('no_info')
   end
 end

@@ -8,6 +8,11 @@ class OctokitClientStub
     JSON.parse(fixture, symbolize_names: true)
   end
 
+  def repo(_github_id)
+    fixture = load_fixture('files/node.json')
+    JSON.parse(fixture, symbolize_names: true)
+  end
+
   private
 
   def load_fixture(filename)

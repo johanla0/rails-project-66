@@ -23,11 +23,11 @@ class ActiveSupport::TestCase
   end
 
   # Add more helper methods to be used by all tests here...
-  include AuthenticationHelper
-
   def load_fixture(filename)
     File.read(File.dirname(__FILE__) + "/fixtures/#{filename}")
   end
-  class ActionDispatch::IntegrationTest
-  end
+end
+
+class ActionDispatch::IntegrationTest
+  include AuthenticationHelper
 end

@@ -26,7 +26,7 @@ created:
   issues_count: 0
   passed: false
   aasm_state: created
-  repository: octokit
+  repository: node
 
 in_process:
   commit_id: <%= SecureRandom.hex(4) %>
@@ -37,9 +37,23 @@ in_process:
 
 failed:
   commit_id: <%= SecureRandom.hex(4) %>
-  issues_count: 3
+  issues_count: 0
   passed: false
   aasm_state: failed
+  repository: node
+
+finished:
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 0
+  passed: true
+  aasm_state: finished
+  repository: node
+
+finished_with_issues:
+  commit_id: <%= SecureRandom.hex(4) %>
+  issues_count: 3
+  passed: false
+  aasm_state: finished
   repository: node
   issues: >
     [
@@ -47,15 +61,15 @@ failed:
         "path": "app/javascript/controllers/toast_controller.js",
         "issues": [
           {
-            "message": "'my' is defined but never used.",
+            "message": "'my' is assigned a value but never used.",
             "name": "no-unused-vars",
             "line": 4,
-            "column": 10
+            "column": 7
           },
           {
             "message": "'Controller' is not defined.",
             "name": "no-undef",
-            "line": 8,
+            "line": 6,
             "column": 30
           },
           {
@@ -67,10 +81,3 @@ failed:
         ]
       }
     ]
-
-finished:
-  commit_id: <%= SecureRandom.hex(4) %>
-  issues_count: 0
-  passed: true
-  aasm_state: finished
-  repository: hexletcv

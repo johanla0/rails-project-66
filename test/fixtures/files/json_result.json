@@ -1,0 +1,60 @@
+[
+  {
+    "filePath":"app/javascript/controllers/toast_controller.js",
+    "messages": [
+      {
+        "ruleId":"no-unused-vars",
+        "severity":2,
+        "message":"'my' is assigned a value but never used.",
+        "line":4,
+        "column":7,
+        "nodeType":"Identifier",
+        "messageId":"unusedVar",
+        "endLine":4,
+        "endColumn":9
+      },
+      {
+        "ruleId":"no-undef",
+        "severity":2,
+        "message":"'Controller' is not defined.",
+        "line":6,
+        "column":30,
+        "nodeType":"Identifier",
+        "messageId":"undef",
+        "endLine":6,
+        "endColumn":40
+      },
+      {
+        "ruleId":"no-undef",
+        "severity":2,
+        "message":"'bootstrap' is not defined.",
+        "line":8,
+        "column":23,
+        "nodeType":"Identifier",
+        "messageId":"undef",
+        "endLine":8,
+        "endColumn":32
+      }
+    ],
+    "suppressedMessages":[],
+    "errorCount":3,
+    "fatalErrorCount":0,
+    "warningCount":0,
+    "fixableErrorCount":0,
+    "fixableWarningCount":0,
+    "usedDeprecatedRules": [
+      {
+        "ruleId":"lines-around-directive",
+        "replacedBy":["padding-line-between-statements"]
+      },
+      {
+        "ruleId":"no-spaced-func",
+        "replacedBy":["func-call-spacing"]
+      },
+      {
+        "ruleId":"global-require",
+        "replacedBy":[]
+      }
+    ]
+  }
+]
