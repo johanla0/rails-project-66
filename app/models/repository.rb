@@ -25,6 +25,7 @@
 #
 class Repository < ApplicationRecord
   RELEVANT_FIELDS = %i[full_name git_url language name ssh_url].freeze
+  SUPPORTED_LANGUAGES = %i[javascript ruby].freeze
 
   include Presentable
   extend Enumerize
@@ -32,7 +33,7 @@ class Repository < ApplicationRecord
   belongs_to :user
   has_many :checks, dependent: :destroy
 
-  enumerize :language, in: %i[javascript ruby]
+  enumerize :language, in: SUPPORTED_LANGUAGES
 
   validates :github_id, presence: true
 end

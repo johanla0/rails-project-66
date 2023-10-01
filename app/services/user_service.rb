@@ -4,8 +4,7 @@ class UserService
   class << self
     def fetch_repositories!(user)
       client = octokit_client(user)
-      # FIXME: Need to cache repos?
-      client.repos
+      client.repos.select { |r| r[:language].present? && Repository::SUPPORTED_LANGUAGES.include?(r[:language].downcase.to_sym) }
     rescue Octokit::Error => e
       Rails.logger.error(e.message)
       Sentry.capture_exception(e)
