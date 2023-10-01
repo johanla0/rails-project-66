@@ -24,10 +24,5 @@ class RepositoryService
         nil
       end
     end
-
-    def destroy!(repository)
-      # TODO: stop running and scheduled jobs for this repo?
-      # Destroy repository
-    end
   end
 end

@@ -34,13 +34,6 @@ class Web::RepositoriesController < Web::ApplicationController
     end
   end
 
-  def destroy
-    @repository = Repository.find repository[:id]
-
-    RepositoryService.destroy!(@repository)
-    f :success, redirect_back: true, redirect: repositories_path, status: :see_other
-  end
-
   private
 
   def repository_params
