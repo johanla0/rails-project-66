@@ -5,7 +5,6 @@ class Web::ApplicationController < ApplicationController
   include Flash
   include Pundit::Authorization
 
-  protect_from_forgery
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def authenticate_user

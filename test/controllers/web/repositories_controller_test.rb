@@ -5,6 +5,7 @@ require 'test_helper'
 class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:jane)
+    @repository = repositories(:node)
     sign_in @user
   end
 
@@ -21,8 +22,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#show' do
-    repository = repositories(:node)
-    get repository_path(repository)
+    get repository_path(@repository)
 
     assert_response :success
   end
