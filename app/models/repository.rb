@@ -35,5 +35,5 @@ class Repository < ApplicationRecord
 
   enumerize :language, in: SUPPORTED_LANGUAGES
 
-  validates :github_id, presence: true
+  validates :github_id, :language, presence: true
 end

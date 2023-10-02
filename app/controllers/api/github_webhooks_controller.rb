@@ -4,7 +4,7 @@ class Api::GithubWebhooksController < Api::ApplicationController
   def create
     case request.headers['X-GitHub-Event']
     when 'ping'
-      render json: { ping: 'pong' }, status: :ok
+      render json: { message: 'pong' }, status: :ok
     when 'push', nil
       repository = Repository.find_by(github_id: repository_params[:id])
       return render(json: { error: 'not_found' }, status: :not_found) if repository.blank?
@@ -13,7 +13,7 @@ class Api::GithubWebhooksController < Api::ApplicationController
       return render(json: { error: 'conflict' }, status: :conflict) if last_check.present? && (last_check.created? || last_check.in_process?)
 
       RepositoryService.check!(repository)
-      render json: {}, status: :ok
+      render json: { message: 'created' }, status: :ok
     else
       render json: { error: 'not_implemented' }, status: :not_implemented
     end
