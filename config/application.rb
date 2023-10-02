@@ -20,5 +20,7 @@ module RailsProject66
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    routes.default_url_options = { host: ENV.fetch('BASE_URL', 'http://localhost:3000') }
   end
 end

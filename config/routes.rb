@@ -6,10 +6,7 @@ Rails.application.routes.draw do
   root 'web/welcome#show'
 
   namespace :api do
-    resources :github_webhooks, only: :create, as: 'checks'
-    # scope module: :github_webhooks do
-    #   post 'checks'
-    # end
+    resources :github_webhooks, only: :create, path: 'checks', as: 'checks'
   end
 
   scope module: :web do
