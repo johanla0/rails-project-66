@@ -7,9 +7,7 @@ class RepositoryMutator
 
       client_repos = UserService.fetch_repositories!(user)
       attrs = client_repos.find { |r| r[:id] == repository.github_id }.to_h.slice(*Repository::RELEVANT_FIELDS)
-      return repository if attrs[:language].nil?
-
-      attrs[:language] = attrs[:language].downcase
+      attrs[:language] = attrs[:language]&.downcase
       repository.assign_attributes(attrs)
       repository.save
 
