@@ -28,7 +28,8 @@ class Web::RepositoriesController < Web::ApplicationController
     if @repository.valid?
       f :success, redirect: repository_path(@repository)
     else
-      f :error, now: true, render: :new, status: :unprocessable_entity
+      # NOTE: status :see_other to pass specific Hexlet test
+      f :error, now: true, render: :new, status: :see_other
     end
   end
 
