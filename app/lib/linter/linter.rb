@@ -22,7 +22,7 @@ module Linter
       repository_directory = @check.repository.decorate.directory_path
       command = "yarn run eslint #{eslint_options(repository_directory).join(' ')} #{repository_directory}"
       stdout, stderr, status = Open3.capture3(command)
-      return nil if status.exitstatus.positive? && stderr
+      return nil if status.exitstatus > 1 && stderr
 
       stdout.split("\n")[2]
     end
@@ -32,7 +32,7 @@ module Linter
       command = "bundle exec rubocop #{rubocop_options(repository_directory).join(' ')}"
       Dir.chdir(repository_directory)
       stdout, stderr, status = Open3.capture3(command)
-      return nil if status.exitstatus.positive? && stderr
+      return nil if status.exitstatus > 1 && stderr
 
       stdout
     end
@@ -48,7 +48,7 @@ module Linter
                      end
       return false if config_files.empty?
 
-      "#{repository_directory}/#{config_files.first}"
+      config_files.first
     end
 
     def eslint_options(repository_directory)

@@ -14,9 +14,9 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     authorize repository
 
     if RepositoryService.check!(repository)
-      f :success, redirect: repositories_path(repository)
+      f :success, redirect: repositories_path
     else
-      f :error, redirect: repositories_path(repository), status: :unprocessable_entity
+      f :error, redirect: repositories_path, status: :unprocessable_entity
     end
   end
 end
