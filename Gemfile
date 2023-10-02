@@ -21,6 +21,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'puma', '~> 5.0'
 gem 'pundit', '~> 2.3'
 gem 'redis'
+# NOTE: rubocop is used by the linter lib
+gem 'rubocop', require: false
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'sentry-sidekiq'
@@ -64,7 +66,6 @@ group :development do
   gem 'annotate', '~> 3.2'
   gem 'bullet', '~> 7.0'
   gem 'i18n-debug'
-  gem 'rubocop', require: false
   gem 'rubocop-minitest', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
