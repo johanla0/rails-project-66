@@ -6,7 +6,7 @@ class CheckMailer < ApplicationMailer
     @repository = @check.repository
     @user = @repository.user
 
-    mail to: user.email,
+    mail to: @user.email,
          subject: t('.subject', repository_name: @repository.name)
   end
 
@@ -15,7 +15,7 @@ class CheckMailer < ApplicationMailer
     @repository = @check.repository
     @user = @repository.user
 
-    mail to: user.email,
+    mail to: @user.email,
          subject: t('.subject', repository_name: @repository.name)
   end
 end
