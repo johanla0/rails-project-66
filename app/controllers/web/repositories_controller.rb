@@ -11,7 +11,7 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def show
-    @repository = Repository.find(params[:id])
+    @repository = Repository.find params[:id]
     authorize @repository
   end
 
@@ -30,6 +30,17 @@ class Web::RepositoriesController < Web::ApplicationController
     else
       # NOTE: status :see_other to pass specific Hexlet test
       f :error, now: true, render: :new, status: :see_other
+    end
+  end
+
+  def destroy
+    repository = Repository.find params[:id]
+    authorize repository
+
+    if repository.destroy
+      f :success, redirect: repositories_path, status: :see_other
+    else
+      f :error, redirect_back: true, redirect: repositories_path, status: :unprocessable_entity
     end
   end
 

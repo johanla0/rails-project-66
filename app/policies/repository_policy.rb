@@ -2,6 +2,10 @@
 
 class RepositoryPolicy < ApplicationPolicy
   def show?
-    record.user == user
+    user_is_owner?
+  end
+
+  def destroy?
+    user_is_owner?
   end
 end

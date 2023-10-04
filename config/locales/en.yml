@@ -1,6 +1,7 @@
 ---
 en:
   all_repositories: All Repositories
+  destroy_confirmation: Are you sure?
   enumerize:
     repository:
       language:
@@ -11,6 +12,7 @@ en:
   new_repository: New repository
   no_info: '-'
   not_authorized: Not enough permissions
+  remove: Remove
   repositories: Repositories
   repository_analyzer: Repository Quality Analyzer
   sign_in: Sign in

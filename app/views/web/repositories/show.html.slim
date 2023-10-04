@@ -1,4 +1,10 @@
-h1 = @repository.full_name
+.d-flex.justify-content-between.align-items-center
+  div
+    h1 = @repository.full_name
+  div
+    = link_to repository_path(@repository), class: 'btn btn-danger', data: { turbo_method: :delete, turbo_confirm: t('destroy_confirmation') } do
+      i.bi.bi-trash3.me-1
+      = t('remove')
 
 menu.px-0
   - let @repository.checks.last do |last_check|

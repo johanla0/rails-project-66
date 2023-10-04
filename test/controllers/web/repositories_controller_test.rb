@@ -49,4 +49,13 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert { repository.present? }
     assert_redirected_to repository_path(repository)
   end
+
+  test '#destroy' do
+    delete repository_path(@repository)
+
+    assert_response :redirect
+    repository = Repository.find_by id: @repository.id
+
+    assert { repository.blank? }
+  end
 end
