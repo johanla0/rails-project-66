@@ -31,7 +31,7 @@ class Repository < ApplicationRecord
   extend Enumerize
 
   belongs_to :user
-  has_many :checks, dependent: :destroy
+  has_many :checks, dependent: :destroy, class_name: 'Repository::Check'
 
   enumerize :language, in: SUPPORTED_LANGUAGES
 

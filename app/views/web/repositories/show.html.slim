@@ -7,10 +7,10 @@
       = t('remove')
 
 menu.px-0
-  - let @repository.checks.last do |last_check|
+  - let @checks.last do |last_check|
     - let last_check.blank? || last_check.failed? || last_check.finished? do |check_enabled|
       = link_to repository_checks_path(@repository), class: "btn btn-primary #{check_enabled ? '' : 'disabled'}", data: { turbo_method: :post } do
         i.bi.bi-rocket-takeoff.me-1
         = t('.check')
 
-= render partial: 'repository', object: @repository
+= render partial: 'repository', locals: { repository: @repository, checks: @checks }

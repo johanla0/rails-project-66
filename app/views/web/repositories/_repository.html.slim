@@ -27,5 +27,5 @@ section
         th scope='col'
           = han(Repository::Check, :created_at)
     tbody *{ id: dom_id(repository, :table) }
-      - repository.checks.each do |check|
+      - checks.order_by_created_at.each do |check|
         = render partial: 'check_row', locals: { check: }

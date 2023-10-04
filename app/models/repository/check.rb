@@ -44,6 +44,8 @@ class Repository::Check < ApplicationRecord
     end
   end
 
+  include Repository::CheckRepository
+
   def with_issues?
     issues_count.positive?
   end
