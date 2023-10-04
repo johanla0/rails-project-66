@@ -4,7 +4,7 @@ class UserService
   class << self
     def fetch_repositories!(user)
       client = octokit_client(user)
-      client.repos.select { |r| r[:language].present? && Repository::SUPPORTED_LANGUAGES.include?(r[:language].downcase.to_sym) }
+      client.repos
     rescue Octokit::Error => e
       Rails.logger.error(e.message)
       Sentry.capture_exception(e)

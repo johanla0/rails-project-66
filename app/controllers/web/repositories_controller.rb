@@ -2,7 +2,7 @@
 
 class Web::RepositoriesController < Web::ApplicationController
   before_action :authenticate_user
-  before_action :fetch_client_repos, only: %i[new create]
+  before_action :fetch_suitable_client_repos, only: %i[new create]
 
   def index
     authorize(Repository)
@@ -50,7 +50,9 @@ class Web::RepositoriesController < Web::ApplicationController
     params.require(:repository).permit(:github_id)
   end
 
-  def fetch_client_repos
+  def fetch_suitable_client_repos
     @client_repos = UserService.fetch_repositories!(current_user)
+                               .select { |r| r[:language].present? && Repository::SUPPORTED_LANGUAGES.include?(r[:language].downcase.to_sym) }
+                               .reject { |r| current_user.repositories.map(&:github_id).include? r[:id] }
   end
 end
