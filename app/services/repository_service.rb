@@ -11,7 +11,7 @@ class RepositoryService
     end
 
     def shallow_clone!(repository)
-      user_directory = repository.user.decorate.directory_path
+      user_directory = repository.user.directory_path
       FileUtils.mkdir_p(user_directory)
       Dir.chdir(user_directory)
 

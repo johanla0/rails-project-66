@@ -36,4 +36,18 @@ class Repository < ApplicationRecord
   enumerize :language, in: SUPPORTED_LANGUAGES
 
   validates :github_id, :language, presence: true
+
+  def directory_path
+    Rails.root.join("tmp/repositories/#{user.nickname}/#{name}")
+  end
+
+  def check_enabled?
+    checks.last.tap do |last_check|
+      last_check.blank? || last_check.failed? || last_check.finished?
+    end
+  end
+
+  def check_disabled?
+    !check_enabled?
+  end
 end

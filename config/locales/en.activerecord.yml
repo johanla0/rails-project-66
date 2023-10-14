@@ -1,4 +1,12 @@
+---
 en:
+  activerecord:
+    attributes:
+      repository/check:
+        aasm_state/created: Created
+        aasm_state/failed: Failed
+        aasm_state/finished: Finished
+        aasm_state/in_process: In Process
   helpers:
     submit:
       repository:

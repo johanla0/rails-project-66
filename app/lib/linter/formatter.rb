@@ -25,7 +25,7 @@ module Linter
     def format_eslint(data)
       return {} if @issues_count.zero?
 
-      repository_directory = @linter.check.repository.decorate.directory_path
+      repository_directory = @linter.check.repository.directory_path
       data.map do |file|
         issues = file[:messages].map do |message|
           {
@@ -42,7 +42,7 @@ module Linter
     def format_rubocop(data)
       return {} if @issues_count.zero?
 
-      repository_directory = @linter.check.repository.decorate.directory_path
+      repository_directory = @linter.check.repository.directory_path
       data[:files].map do |file|
         issues = file[:offenses].map do |offense|
           {
