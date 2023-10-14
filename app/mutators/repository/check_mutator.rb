@@ -19,16 +19,13 @@ class Repository::CheckMutator
 
       check.commit_hash = git.log.first.sha[0, 7]
 
-      linter = ApplicationContainer[:linter].new(check)
-      if linter.json_data.nil?
+      json_data = ApplicationContainer[:linter].build(check)
+      if json_data.nil?
         check.fail!
         return check
       end
 
-      formatter = Linter::Formatter.new(linter)
-
-      check.issues = formatter.json_data
-      check.issues_count = formatter.issues_count
+      check.issues, check.issues_count = Linter::Formatter.build(check, json_data)
       check.finish!
       check.passed = check.issues_count.zero?
 
