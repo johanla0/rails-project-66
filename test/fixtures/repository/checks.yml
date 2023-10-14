@@ -4,12 +4,12 @@
 #
 #  id            :integer          not null, primary key
 #  aasm_state    :string
+#  commit_hash   :string
 #  issues        :json
 #  issues_count  :integer          default(0)
 #  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  commit_id     :string
 #  repository_id :integer          not null
 #
 # Indexes
@@ -22,35 +22,35 @@
 #
 
 created:
-  commit_id: <%= SecureRandom.hex(4) %>
+  commit_hash: <%= SecureRandom.hex(4) %>
   issues_count: 0
   passed: false
   aasm_state: created
   repository: node
 
 in_process:
-  commit_id: <%= SecureRandom.hex(4) %>
+  commit_hash: <%= SecureRandom.hex(4) %>
   issues_count: 0
   passed: false
   aasm_state: in_process
   repository: octokit
 
 failed:
-  commit_id: <%= SecureRandom.hex(4) %>
+  commit_hash: <%= SecureRandom.hex(4) %>
   issues_count: 0
   passed: false
   aasm_state: failed
   repository: node
 
 finished:
-  commit_id: <%= SecureRandom.hex(4) %>
+  commit_hash: <%= SecureRandom.hex(4) %>
   issues_count: 0
   passed: true
   aasm_state: finished
   repository: node
 
 finished_with_issues:
-  commit_id: <%= SecureRandom.hex(4) %>
+  commit_hash: <%= SecureRandom.hex(4) %>
   issues_count: 3
   passed: false
   aasm_state: finished

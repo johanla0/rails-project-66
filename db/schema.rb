@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_150428) do
 
   create_table "repository_checks", force: :cascade do |t|
     t.boolean "passed", default: false
-    t.string "commit_id"
+    t.string "commit_hash"
     t.integer "issues_count", default: 0
     t.string "aasm_state"
     t.json "issues"
