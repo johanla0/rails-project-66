@@ -6,12 +6,12 @@
 #
 #  id            :integer          not null, primary key
 #  aasm_state    :string
+#  commit_hash   :string
 #  issues        :json
 #  issues_count  :integer          default(0)
 #  passed        :boolean          default(FALSE)
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  commit_id     :string
 #  repository_id :integer          not null
 #
 # Indexes

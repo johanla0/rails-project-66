@@ -17,7 +17,7 @@ class Repository::CheckMutator
         return check
       end
 
-      check.commit_id = git.log.first.sha[0, 7]
+      check.commit_hash = git.log.first.sha[0, 7]
 
       linter = ApplicationContainer[:linter].new(check)
       if linter.json_data.nil?
