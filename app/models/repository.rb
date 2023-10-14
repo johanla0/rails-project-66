@@ -42,9 +42,7 @@ class Repository < ApplicationRecord
   end
 
   def check_enabled?
-    checks.last.tap do |last_check|
-      last_check.blank? || last_check.failed? || last_check.finished?
-    end
+    checks.last.blank? || checks.last.failed? || checks.last.finished?
   end
 
   def check_disabled?
