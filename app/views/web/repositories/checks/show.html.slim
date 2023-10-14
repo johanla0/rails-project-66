@@ -12,7 +12,7 @@ table.table *{ id: dom_id(@check) }
     td.w-50 = l(@check.created_at, format: :long)
   tr
     td = han(Repository::Check, :state)
-    td = hsn(Repository::Check, @check.aasm_state)
+    td = @check.aasm.human_state
   tr
     td = han(Repository::Check, :passed)
     td = @check.passed

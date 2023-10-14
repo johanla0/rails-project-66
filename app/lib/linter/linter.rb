@@ -19,7 +19,7 @@ module Linter
     private
 
     def run_javascript_linter
-      repository_directory = @check.repository.decorate.directory_path
+      repository_directory = @check.repository.directory_path
       command = "yarn run eslint #{eslint_options.join(' ')} #{repository_directory}"
       stdout, stderr, status = Open3.capture3(command)
       return nil if status.exitstatus > 1 && stderr
@@ -28,7 +28,7 @@ module Linter
     end
 
     def run_ruby_linter
-      repository_directory = @check.repository.decorate.directory_path
+      repository_directory = @check.repository.directory_path
       command = "bundle exec rubocop #{rubocop_options.join(' ')}"
       Dir.chdir(repository_directory)
       stdout, stderr, status = Open3.capture3(command)

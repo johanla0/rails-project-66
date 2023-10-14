@@ -34,7 +34,7 @@ class Repository::CheckMutator
 
       check
     ensure
-      repository_directory = check.repository.decorate.directory_path
+      repository_directory = check.repository.directory_path
       FileUtils.rm_r repository_directory, force: true
     end
   end
