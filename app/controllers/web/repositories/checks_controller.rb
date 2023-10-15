@@ -5,7 +5,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     repository = Repository.find params[:repository_id]
     authorize repository, policy_class: Repository::CheckPolicy
 
-    @check = Repository::Check.find params[:id]
+    @check = repository.checks.find params[:id]
     @issues = JSON.parse(@check.issues, symbolize_names: true) if @check.issues.present?
   end
 
@@ -13,7 +13,9 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
     repository = current_user.repositories.find params[:repository_id]
     authorize repository, policy_class: Repository::CheckPolicy
 
-    if RepositoryService.check!(repository)
+    check = Repository::Check.create(repository:)
+    if check
+      CheckRepositoryJob.perform_async(check.id)
       f :success, redirect: repository_path(repository)
     else
       f :error, redirect: repository_path(repository), status: :unprocessable_entity

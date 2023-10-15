@@ -5,10 +5,10 @@ class CheckRepositoryJob
 
   sidekiq_options retry: 0
 
-  def perform(repository_id)
-    repository = Repository.find repository_id
-    return if repository.blank?
+  def perform(check_id)
+    check = Repository::Check.find check_id
+    return if check.blank?
 
-    Repository::CheckService.create!(repository)
+    Repository::CheckService.run!(check)
   end
 end

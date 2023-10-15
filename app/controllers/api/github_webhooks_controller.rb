@@ -12,7 +12,7 @@ class Api::GithubWebhooksController < Api::ApplicationController
       last_check = repository.checks.last
       return render(json: { error: 'conflict' }, status: :conflict) if last_check.present? && (last_check.created? || last_check.in_process?)
 
-      RepositoryService.check!(repository)
+      CheckRepositoryJob.perform_async(repository.id)
       render json: { message: 'created' }, status: :ok
     else
       render json: { error: 'not_implemented' }, status: :not_implemented
