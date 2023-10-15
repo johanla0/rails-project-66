@@ -2,11 +2,8 @@
 
 class Web::RepositoriesController < Web::ApplicationController
   before_action :authenticate_user
-  before_action :fetch_suitable_client_repos, only: %i[new create]
 
   def index
-    authorize(Repository)
-
     @repositories = current_user.repositories.includes([:checks]).order(full_name: :asc).map(&:decorate)
   end
 
@@ -18,16 +15,17 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def new
-    authorize(Repository)
-
+    @client_repos = fetch_suitable_client_repos
     @repository = Repository.new
   end
 
   def create
-    authorize(Repository)
+    @client_repos = fetch_suitable_client_repos
 
-    @repository = RepositoryService.create!(current_user, repository_params)
-    if @repository.valid?
+    @repository = current_user.repositories.build(repository_params)
+
+    if @repository.save
+      UpdateRepositoryJob.perform_async(@repository.id)
       f :success, redirect: repository_path(@repository)
     else
       # NOTE: status :see_other to pass specific Hexlet test
@@ -53,8 +51,8 @@ class Web::RepositoriesController < Web::ApplicationController
   end
 
   def fetch_suitable_client_repos
-    @client_repos = UserService.fetch_repositories!(current_user)
-                               .select { |r| r[:language].present? && Repository::SUPPORTED_LANGUAGES.include?(r[:language].downcase.to_sym) }
-                               .reject { |r| current_user.repositories.map(&:github_id).include? r[:id] }
+    RepositoryService.fetch_repositories!(current_user)
+                     .select { |r| r[:language].present? && Repository::SUPPORTED_LANGUAGES.include?(r[:language].downcase.to_sym) }
+                     .reject { |r| current_user.repositories.map(&:github_id).include? r[:id] }
   end
 end

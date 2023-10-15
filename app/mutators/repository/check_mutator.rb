@@ -2,13 +2,6 @@
 
 class Repository::CheckMutator
   class << self
-    def create!(repository)
-      check = Repository::Check.create(repository:)
-      run!(check)
-    end
-
-    private
-
     def run!(check)
       check.start!
       git = RepositoryService.shallow_clone!(check.repository)

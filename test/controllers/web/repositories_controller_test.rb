@@ -47,6 +47,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository = Repository.find_by attrs
 
     assert { repository.present? }
+    assert { repository.name.present? }
     assert_redirected_to repository_path(repository)
   end
 

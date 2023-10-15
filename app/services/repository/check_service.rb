@@ -2,8 +2,8 @@
 
 class Repository::CheckService
   class << self
-    def create!(repository)
-      check = Repository::CheckMutator.create!(repository)
+    def run!(check)
+      check = Repository::CheckMutator.run!(check)
       CheckMailer.with(check:).failed.deliver_later if check.failed?
       CheckMailer.with(check:).with_issues.deliver_later if check.finished? && !check.passed
 
