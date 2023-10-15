@@ -36,13 +36,13 @@ module Linter
       end
 
       def eslint_options
-        options = "--config #{Dir.glob(Rails.root.join('.eslintrc.*').to_s)}"
+        options = "--config #{Dir.glob(Rails.root.join('.eslintrc.*').to_s).first}"
 
         ['--format json', options]
       end
 
       def rubocop_options
-        options = "--config #{Dir.glob(Rails.root.join('.rubocop.yml').to_s)}"
+        options = "--config #{Dir.glob(Rails.root.join('.rubocop.yml').to_s).first}"
 
         [
           '--safe',

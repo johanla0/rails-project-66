@@ -9,8 +9,11 @@ class RepositoryService
       FileUtils.mkdir_p(user_directory)
       Dir.chdir(user_directory)
 
+      # NOTE: Need to fetch, in other case we have job being stuck
+      # This does not work Git.clone(repository[:git_url], nil, depth: 1)
+      github_repository = RepositoryService.fetch_repository!(repository.user, repository)
       begin
-        Git.clone(repository[:git_url], nil, depth: 1)
+        Git.clone(github_repository[:clone_url], nil, depth: 1)
       rescue Git::FailedError => e
         Rails.logger.error(e.message)
         Sentry.capture_exception(e)
