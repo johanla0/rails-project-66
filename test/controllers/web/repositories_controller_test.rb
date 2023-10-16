@@ -27,6 +27,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # rubocop:disable Minitest/MultipleAssertions: Test case has too many assertions
   test '#create' do
     attrs = {
       github_id: 307_194_079
@@ -45,6 +46,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert { repository.name.present? }
     assert_redirected_to repository_path(repository)
   end
+  # rubocop:enable Minitest/MultipleAssertions: Test case has too many assertions
 
   test '#destroy' do
     delete repository_path(@repository)

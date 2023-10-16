@@ -15,6 +15,7 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # rubocop:disable Minitest/MultipleAssertions: Test case has too many assertions
   test '#create' do
     # NOTE: In tests we use ApplicationContainer as a stub in which we return fixed set of data
     # Thus here we check if the number of checks has changed
@@ -37,4 +38,5 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
 
     assert { check.finished? }
   end
+  # rubocop:enable Minitest/MultipleAssertions: Test case has too many assertions
 end
