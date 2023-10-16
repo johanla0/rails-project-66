@@ -9,7 +9,6 @@ gem 'rails', '~> 7.0.4', '>= 7.0.4.3'
 
 gem 'aasm'
 gem 'cssbundling-rails'
-gem 'data_migrate'
 gem 'dotenv-rails', '~> 2.8'
 gem 'dry-container'
 gem 'enumerize', '~> 2.7'
