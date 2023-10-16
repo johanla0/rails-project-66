@@ -3,7 +3,8 @@
 class LinterStub
   class << self
     def build(*)
-      load_fixture('files/json_result.json')
+      load_fixture('files/json_result_success.json')
+      # load_fixture('files/json_result.json')
     end
 
     private

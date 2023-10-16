@@ -81,3 +81,8 @@ finished_with_issues:
         ]
       }
     ]
+
+one:
+  repository: hexlet_basics
+  aasm_state: finished
+  passed: false

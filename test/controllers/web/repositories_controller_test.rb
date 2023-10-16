@@ -43,7 +43,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     repository.reload
 
     assert { repository.present? }
-    assert { repository.name.present? }
+    assert { repository.language.present? }
     assert_redirected_to repository_path(repository)
   end
   # rubocop:enable Minitest/MultipleAssertions: Test case has too many assertions

@@ -21,3 +21,9 @@ jane:
   email: jane@test.com
   nickname: microsoft
   token: <%= SecureRandom.hex(10) %>
+
+one:
+  email: one@test.io
+
+two:
+  email: two@test.io
