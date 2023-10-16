@@ -28,16 +28,6 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test '#create' do
-    response = load_fixture('files/repo_javascript.json')
-
-    uri_template = Addressable::Template.new 'https://api.github.com/repos/{user}/{repo}'
-    stub_request(:get, uri_template)
-      .to_return(
-        status: 200,
-        body: response,
-        headers: { content_type: 'application/json' }
-      )
-
     attrs = {
       github_id: 307_194_079
     }

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::GithubWebhooksController < Api::ApplicationController
-  def create
+  def checks
     case request.headers['X-GitHub-Event']
     when 'ping'
       render json: { message: 'pong' }, status: :ok

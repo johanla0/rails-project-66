@@ -38,5 +38,6 @@ class Web::AuthControllerTest < ActionDispatch::IntegrationTest
     delete auth_logout_path
 
     assert_response :redirect
+    assert { current_user.blank? }
   end
 end
