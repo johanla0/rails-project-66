@@ -6,10 +6,10 @@ class ApplicationContainer
   if Rails.env.test?
     register :octokit_client, -> { OctokitClientStub }
     register :linter, -> { LinterStub }
-    register :repository_service, -> { RepositoryServiceStub }
+    register :check_service, -> { CheckServiceStub }
   else
     register :octokit_client, -> { Octokit::Client }
     register :linter, -> { Linter::Linter }
-    register :repository_service, -> { RepositoryService }
+    register :check_service, -> { Repository::CheckService }
   end
 end

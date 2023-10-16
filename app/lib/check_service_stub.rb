@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class RepositoryServiceStub
+class CheckServiceStub
   class << self
     Git = Struct.new(:log)
     Logger = Struct.new(:sha)
