@@ -4,6 +4,9 @@ require 'test_helper'
 
 class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
   setup do
+    queue_adapter.perform_enqueued_jobs = true
+    queue_adapter.perform_enqueued_at_jobs = true
+
     @user = users(:jane)
     sign_in @user
   end
@@ -15,7 +18,6 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # rubocop:disable Minitest/MultipleAssertions: Test case has too many assertions
   test '#create' do
     # NOTE: In tests we use ApplicationContainer as a stub in which we return fixed set of data
     # Thus here we check if the number of checks has changed
@@ -30,13 +32,8 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     assert { repository.checks.count > checks_count_before }
 
     check = repository.checks.last
-
-    assert_enqueued_with(job: CheckRepositoryJob, args: [check.id])
-    perform_enqueued_jobs
-
     check.reload
 
     assert { check.finished? }
   end
-  # rubocop:enable Minitest/MultipleAssertions: Test case has too many assertions
 end

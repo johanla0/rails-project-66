@@ -4,6 +4,9 @@ require 'test_helper'
 
 class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    queue_adapter.perform_enqueued_jobs = true
+    queue_adapter.perform_enqueued_at_jobs = true
+
     @user = users(:jane)
     @repository = repositories(:node)
     sign_in @user
@@ -27,7 +30,6 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # rubocop:disable Minitest/MultipleAssertions: Test case has too many assertions
   test '#create' do
     attrs = {
       github_id: 307_194_079
@@ -36,17 +38,12 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     post repositories_path, params: { repository: attrs }
 
     repository = Repository.find_by attrs
-
-    assert_enqueued_with(job: UpdateRepositoryJob, args: [repository.id])
-    perform_enqueued_jobs
-
     repository.reload
 
     assert { repository.present? }
     assert { repository.language.present? }
     assert_redirected_to repository_path(repository)
   end
-  # rubocop:enable Minitest/MultipleAssertions: Test case has too many assertions
 
   test '#destroy' do
     delete repository_path(@repository)

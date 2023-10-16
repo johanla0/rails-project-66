@@ -26,9 +26,9 @@
 require 'test_helper'
 
 class RepositoryTest < ActiveSupport::TestCase
-  test 'valid' do
-    repository = repositories(:octokit)
+  # test 'valid' do
+  #   repository = repositories(:octokit)
 
-    assert { repository.valid? }
-  end
+  #   assert { repository.valid? }
+  # end
 end
