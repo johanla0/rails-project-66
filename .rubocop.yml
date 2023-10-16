@@ -1,6 +1,5 @@
 ---
 require:
-  - rubocop-minitest
   - rubocop-performance
   - rubocop-rails
 AllCops:
@@ -36,11 +35,3 @@ Style/AsciiComments:
   Enabled: false
 Metrics/ParameterLists:
   Enabled: false
-Rails/DynamicFindBy:
-  Enabled: true
-Rails/InverseOf:
-  Enabled: false
-Metrics/ClassLength:
-  Enabled: false
-Minitest/EmptyLineBeforeAssertionMethods:
-  Enabled: true

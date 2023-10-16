@@ -5,11 +5,6 @@ class Repository::CheckMutator
     def run!(check)
       check.start!
       git = ApplicationContainer[:repository_service].shallow_clone!(check.repository)
-
-      puts '-----'
-      puts git.inspect
-      puts '-----'
-
       if git.blank?
         check.fail!
         check.save!
