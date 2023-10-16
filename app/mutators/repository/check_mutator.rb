@@ -5,6 +5,10 @@ class Repository::CheckMutator
     def run!(check)
       check.start!
       git = ApplicationContainer[:repository_service].shallow_clone!(check.repository)
+
+      puts '-----'
+      puts git.inspect
+
       if git.blank?
         check.fail!
         check.save!
@@ -14,6 +18,11 @@ class Repository::CheckMutator
       check.commit_hash = git.log.first.sha[0, 7]
 
       json_data = ApplicationContainer[:linter].build(check)
+
+      puts '-----'
+      puts json_data
+      puts '-----'
+
       if json_data.nil?
         check.fail!
         check.save!
