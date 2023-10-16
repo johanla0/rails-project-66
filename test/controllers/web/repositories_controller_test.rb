@@ -30,9 +30,10 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # rubocop:disable Minitest/MultipleAssertions
   test '#create' do
     attrs = {
-      github_id: 307_194_079
+      github_id: 1
     }
 
     post repositories_path, params: { repository: attrs }
@@ -42,8 +43,10 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     assert { repository.present? }
     assert { repository.language.present? }
+    assert { repository.full_name.present? }
     assert_redirected_to repository_path(repository)
   end
+  # rubocop:enable Minitest/MultipleAssertions
 
   test '#destroy' do
     delete repository_path(@repository)
