@@ -25,6 +25,7 @@ class Web::RepositoriesController < Web::ApplicationController
 
     if @repository.save
       UpdateRepositoryJob.perform_later(@repository.id)
+      RepositoryService.create_hook!(@repository)
       f :success, redirect: repository_path(@repository)
     else
       # NOTE: status :see_other to pass specific Hexlet test

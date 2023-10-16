@@ -2,6 +2,8 @@
 
 class RepositoryService
   class << self
+    include Rails.application.routes.url_helpers
+
     def shallow_clone!(repository)
       # NOTE: Need to create directory manually, otherwise Git.clone tries to use
       # destination path which already exists and is not an empty directory
@@ -19,6 +21,23 @@ class RepositoryService
         Sentry.capture_exception(e)
         nil
       end
+    end
+
+    def create_hook!(repository)
+      # NOTE: See https://docs.github.com/en/rest/webhooks/repo-config#update-a-webhook-configuration-for-a-repository
+      client = octokit_client(repository.user)
+      client.create_hook(
+        repository.full_name,
+        'web',
+        {
+          url: api_checks_url,
+          content_type: 'json'
+        },
+        {
+          events: ['push'],
+          active: true
+        }
+      )
     end
 
     def fetch_repositories!(user)
