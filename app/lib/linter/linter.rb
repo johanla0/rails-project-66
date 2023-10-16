@@ -30,6 +30,13 @@ module Linter
         command = "bundle exec rubocop #{rubocop_options.join(' ')}"
         Dir.chdir(repository_directory)
         stdout, stderr, status = Open3.capture3(command)
+
+        puts '-----'
+        puts stdout
+        puts stderr
+        puts status
+        puts '-----'
+
         return nil if status.exitstatus > 1 && stderr
 
         stdout

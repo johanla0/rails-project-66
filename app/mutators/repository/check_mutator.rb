@@ -8,6 +8,7 @@ class Repository::CheckMutator
 
       puts '-----'
       puts git.inspect
+      puts '-----'
 
       if git.blank?
         check.fail!
@@ -18,11 +19,6 @@ class Repository::CheckMutator
       check.commit_hash = git.log.first.sha[0, 7]
 
       json_data = ApplicationContainer[:linter].build(check)
-
-      puts '-----'
-      puts json_data
-      puts '-----'
-
       if json_data.nil?
         check.fail!
         check.save!
