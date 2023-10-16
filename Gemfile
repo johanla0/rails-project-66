@@ -22,6 +22,8 @@ gem 'pundit', '~> 2.3'
 gem 'redis'
 # NOTE: rubocop is used by the linter lib
 gem 'rubocop', require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'simple_form'
@@ -64,8 +66,6 @@ group :development do
   gem 'bullet', '~> 7.0'
   gem 'i18n-debug'
   gem 'rubocop-minitest', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
   gem 'rubocop-rake', require: false
 
   gem 'slim_lint', '~> 0.24.0'
