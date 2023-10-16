@@ -33,7 +33,7 @@ in_process:
   issues_count: 0
   passed: false
   aasm_state: in_process
-  repository: octokit
+  repository: node
 
 failed:
   commit_hash: <%= SecureRandom.hex(4) %>
