@@ -15,7 +15,7 @@ class Web::Repositories::ChecksController < Web::Repositories::ApplicationContro
 
     check = Repository::Check.create(repository:)
     if check
-      CheckRepositoryJob.perform_async(check.id)
+      CheckRepositoryJob.perform_later(check.id)
       f :success, redirect: repository_path(repository)
     else
       f :error, redirect: repository_path(repository), status: :unprocessable_entity

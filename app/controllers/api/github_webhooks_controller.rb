@@ -11,7 +11,8 @@ class Api::GithubWebhooksController < Api::ApplicationController
 
       return render(json: { error: 'conflict' }, status: :conflict) if repository.being_checked?
 
-      CheckRepositoryJob.perform_async(repository.id)
+      check = Repository::Check.create(repository:)
+      CheckRepositoryJob.perform_later(check.id)
       render json: { message: 'created' }, status: :ok
     else
       render json: { error: 'not_implemented' }, status: :not_implemented

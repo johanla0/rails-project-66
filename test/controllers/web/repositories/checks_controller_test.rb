@@ -27,5 +27,14 @@ class Web::Repositories::CheckControllerTest < ActionDispatch::IntegrationTest
     repository.reload
 
     assert { repository.checks.count > checks_count_before }
+
+    check = repository.checks.last
+
+    assert_enqueued_with(job: CheckRepositoryJob, args: [check.id])
+    perform_enqueued_jobs
+
+    check.reload
+
+    assert { check.finished? }
   end
 end

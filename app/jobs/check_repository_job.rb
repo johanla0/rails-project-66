@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-class CheckRepositoryJob
-  include Sidekiq::Job
-
-  sidekiq_options retry: 0
+class CheckRepositoryJob < ApplicationJob
+  queue_as :default
 
   def perform(check_id)
     check = Repository::Check.find check_id

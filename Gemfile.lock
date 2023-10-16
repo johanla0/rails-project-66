@@ -292,14 +292,6 @@ GEM
       sentry-ruby (~> 5.10.0)
     sentry-ruby (5.10.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.10.0)
-      sentry-ruby (~> 5.10.0)
-      sidekiq (>= 3.0)
-    sidekiq (7.1.2)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.14.0)
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
@@ -397,8 +389,6 @@ DEPENDENCIES
   sassc-rails
   sentry-rails
   sentry-ruby
-  sentry-sidekiq
-  sidekiq
   simple_form
   slim-rails
   slim_lint (~> 0.24.0)
