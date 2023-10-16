@@ -2,7 +2,7 @@ annotate-models:
 	bundle exec annotate --models
 ci-setup:
 	bundle install
-	bin/rails db:create db:migrate db:migrate:with_data
+	bin/rails db:create db:migrate
 	yarn install --cache-folder .yarn-cache
 	bin/rails assets:precompile
 check: lint test
@@ -19,7 +19,6 @@ install:
 	bundle install
 	bundle exec bin/rails db:create
 	bundle exec bin/rails db:migrate
-	bundle exec bin/rails db:migrate:with_data
 	bundle exec bin/rails db:fixtures:load
 lint:
 	make style
