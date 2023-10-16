@@ -21,7 +21,6 @@ class Web::RepositoriesController < Web::ApplicationController
 
   def create
     @client_repos = fetch_suitable_client_repos
-
     @repository = current_user.repositories.build(repository_params)
 
     if @repository.save

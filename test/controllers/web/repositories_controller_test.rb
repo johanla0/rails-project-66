@@ -33,7 +33,7 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
   # rubocop:disable Minitest/MultipleAssertions
   test '#create' do
     attrs = {
-      github_id: 1
+      github_id: 2
     }
 
     post repositories_path, params: { repository: attrs }
