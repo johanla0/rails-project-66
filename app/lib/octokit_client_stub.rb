@@ -5,6 +5,7 @@ class OctokitClientStub
 
   def repos
     fixture = load_fixture('files/repos.json')
+    # fixture = load_fixture('files/user_repositories.json')
     JSON.parse(fixture, symbolize_names: true)
   end
 
