@@ -25,8 +25,6 @@ gem 'redis'
 gem 'rubocop', require: false
 gem 'sentry-rails'
 gem 'sentry-ruby'
-gem 'sentry-sidekiq'
-gem 'sidekiq'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'sprockets-rails'

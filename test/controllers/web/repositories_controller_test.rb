@@ -36,6 +36,11 @@ class Web::RepositoriesControllerTest < ActionDispatch::IntegrationTest
 
     repository = Repository.find_by attrs
 
+    assert_enqueued_with(job: UpdateRepositoryJob, args: [repository.id])
+    perform_enqueued_jobs
+
+    repository.reload
+
     assert { repository.present? }
     assert { repository.name.present? }
     assert_redirected_to repository_path(repository)
