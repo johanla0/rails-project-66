@@ -48,4 +48,8 @@ class Repository < ApplicationRecord
   def check_disabled?
     !check_enabled?
   end
+
+  def being_checked?
+    checks.last.present? && (checks.last.created? || checks.last.in_process?)
+  end
 end

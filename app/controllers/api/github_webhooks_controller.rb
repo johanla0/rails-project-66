@@ -9,8 +9,7 @@ class Api::GithubWebhooksController < Api::ApplicationController
       repository = Repository.find_by(github_id: repository_params[:id])
       return render(json: { error: 'not_found' }, status: :not_found) if repository.blank?
 
-      last_check = repository.checks.last
-      return render(json: { error: 'conflict' }, status: :conflict) if last_check.present? && (last_check.created? || last_check.in_process?)
+      return render(json: { error: 'conflict' }, status: :conflict) if repository.being_checked?
 
       CheckRepositoryJob.perform_async(repository.id)
       render json: { message: 'created' }, status: :ok
