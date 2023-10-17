@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class UpdateRepositoryJob < ApplicationJob
+class SetupRepositoryJob < ApplicationJob
   queue_as :default
 
   def perform(repository_id)
@@ -15,5 +15,7 @@ class UpdateRepositoryJob < ApplicationJob
     attrs[:full_name] = attrs[:full_name].presence || 'noname'
     repository.assign_attributes(attrs)
     repository.save
+
+    RepositoryService.create_hook!(repository)
   end
 end
