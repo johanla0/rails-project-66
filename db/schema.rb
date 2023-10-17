@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_08_150428) do
-  create_table "data_migrations", primary_key: "version", id: :string, force: :cascade do |t|
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_10_17_111930) do
   create_table "repositories", force: :cascade do |t|
     t.string "name"
     t.string "full_name"
@@ -24,6 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_08_150428) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "clone_url"
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 

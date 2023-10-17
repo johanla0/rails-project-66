@@ -5,6 +5,7 @@
 # Table name: repositories
 #
 #  id         :integer          not null, primary key
+#  clone_url  :string
 #  full_name  :string
 #  git_url    :string
 #  language   :string
@@ -24,7 +25,7 @@
 #  user_id  (user_id => users.id)
 #
 class Repository < ApplicationRecord
-  RELEVANT_FIELDS = %i[full_name git_url language name ssh_url].freeze
+  RELEVANT_FIELDS = %i[full_name git_url language name ssh_url clone_url].freeze
   SUPPORTED_LANGUAGES = %i[javascript ruby].freeze
 
   include Presentable
@@ -38,7 +39,9 @@ class Repository < ApplicationRecord
   validates :github_id, presence: true
 
   def directory_path
-    Rails.root.join("tmp/repositories/#{user.nickname}/#{name}")
+    # Rails.root.join('tmp/repositories/', full_name)
+    Rails.root.join(Dir.tmpdir, 'repositories/', full_name)
+    # File.join(Dir.tmpdir, 'repositories/', full_name)
   end
 
   def check_enabled?

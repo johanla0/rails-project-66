@@ -5,6 +5,7 @@
 # Table name: repositories
 #
 #  id         :integer          not null, primary key
+#  clone_url  :string
 #  full_name  :string
 #  git_url    :string
 #  language   :string

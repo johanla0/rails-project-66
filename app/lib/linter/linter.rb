@@ -20,6 +20,8 @@ module Linter
 
       def run_javascript_linter(repository_directory)
         command = "yarn run eslint #{eslint_options.join(' ')} #{repository_directory}"
+
+        Dir.chdir(Rails.root)
         stdout, stderr, status = Open3.capture3(command)
         return nil if status.exitstatus > 1 && stderr
 
@@ -28,6 +30,7 @@ module Linter
 
       def run_ruby_linter(repository_directory)
         command = "bundle exec rubocop #{rubocop_options.join(' ')}"
+
         Dir.chdir(repository_directory)
         stdout, stderr, status = Open3.capture3(command)
         return nil if status.exitstatus > 1 && stderr

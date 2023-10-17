@@ -15,8 +15,4 @@
 #
 class User < ApplicationRecord
   has_many :repositories, dependent: :destroy
-
-  def directory_path
-    Rails.root.join("tmp/repositories/#{nickname}")
-  end
 end

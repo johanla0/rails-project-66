@@ -22,7 +22,7 @@ https://rails-project-66.onrender.com/
 
 ### Run sidekiq
 
-`make sidekiq`
+_Sidekiq was removed due to Hexlet check incompatibility_
 
 ### Bundle js and watch the stimulus controllers directory
 
