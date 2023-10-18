@@ -25,7 +25,7 @@ module Linter
         stdout, stderr, status = Open3.capture3(command)
         return nil if status.exitstatus > 1 && stderr
 
-        stdout.split("\n")[2]
+        stdout.split("\n")[0]
       end
 
       def run_ruby_linter(repository_directory)
