@@ -19,7 +19,7 @@ module Linter
       private
 
       def run_javascript_linter(repository_directory)
-        command = "yarn run eslint #{eslint_options.join(' ')} #{repository_directory}"
+        command = "node_modules/eslint/bin/eslint.js #{repository_directory} #{eslint_options.join(' ')}"
 
         Dir.chdir(Rails.root)
         stdout, stderr, status = Open3.capture3(command)
@@ -29,7 +29,7 @@ module Linter
       end
 
       def run_ruby_linter(repository_directory)
-        command = "bundle exec rubocop #{rubocop_options.join(' ')}"
+        command = "bundle exec rubocop #{repository_directory} #{rubocop_options.join(' ')}"
 
         Dir.chdir(repository_directory)
         stdout, stderr, status = Open3.capture3(command)
@@ -41,7 +41,7 @@ module Linter
       def eslint_options
         options = "--config #{Dir.glob(Rails.root.join('.eslintrc.*').to_s).first}"
 
-        ['--format json', options]
+        ['--format json', '--no-eslintrc', options]
       end
 
       def rubocop_options

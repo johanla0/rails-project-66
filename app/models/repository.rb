@@ -39,17 +39,7 @@ class Repository < ApplicationRecord
   validates :github_id, presence: true
 
   def directory_path
-    # Rails.root.join('tmp/repositories/', full_name)
     Rails.root.join(Dir.tmpdir, 'repositories/', full_name)
-    # File.join(Dir.tmpdir, 'repositories/', full_name)
-  end
-
-  def check_enabled?
-    checks.last.blank? || checks.last.failed? || checks.last.finished?
-  end
-
-  def check_disabled?
-    !check_enabled?
   end
 
   def being_checked?

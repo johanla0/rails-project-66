@@ -42,7 +42,7 @@ class RepositoryService
     private
 
     def octokit_client(user)
-      @octokit_client ||= ApplicationContainer[:octokit_client].new(access_token: user.token, auto_paginate: true)
+      ApplicationContainer[:octokit_client].new(access_token: user.token, auto_paginate: true)
     end
   end
 end

@@ -7,7 +7,7 @@
       = t('remove')
 
 menu.px-0
-  = link_to repository_checks_path(@repository), class: "btn btn-primary #{class_names(disabled: @repository.check_disabled?)}", data: { turbo_method: :post } do
+  = link_to repository_checks_path(@repository), class: "btn btn-primary #{class_names(disabled: @repository.decorate.check_disabled?)}", data: { turbo_method: :post } do
     i.bi.bi-rocket-takeoff.me-1
     = t('.check')
 
